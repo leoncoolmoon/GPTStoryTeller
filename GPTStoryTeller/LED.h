@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-const int ledPin0 = 2 ;
+const int ledPin0 = 15 ;
 const int ledPin1 = 4 ;
 static float led_brightness = 5.0;
 const float changeRate = 0.1;
