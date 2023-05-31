@@ -1,17 +1,14 @@
-//use esp32audioI2S I2S speech pin 26
+//use esp32audioI2S I2S speech pin 26->esp32s2 pin 17
 #ifdef ESP32
 #include "0key.h"
 extern bool led1 = true;
 extern bool led2 = true;
-
-#include <ChatGPT.hpp>
+extern bool play = false;
+extern bool finish = false;
+extern bool CN = false;
 #include "OTA.h"
 #include "wifiSetup.h"
-#ifdef TOUCH
-#include "touch.h"
-#else
 #include "key.h"
-#endif
 #include "getStory.h"
 
 
@@ -26,11 +23,6 @@ void setup()
 #ifdef LED
   setupLed();
 #endif
-#ifdef CN
- ttsThis("我来给你讲一个故事吧.");
-#else
- ttsThis("I am going to tell you a story.");
-#endif
   requestStory();
 }
 
@@ -38,9 +30,5 @@ void setup()
 void loop()
 {
   loopOTA();
-  //loopPlayer();
-  if (loopKey()) {
-    requestStory();
-  }
 }
 #endif
