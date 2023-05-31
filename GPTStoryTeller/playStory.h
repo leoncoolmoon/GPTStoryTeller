@@ -5,22 +5,22 @@
 #include "Arduino.h"
 #include "Audio.h"
 
-#define I2S_DOUT      25
-#define I2S_BCLK      27
-#define I2S_LRC       26
+//#define I2S_DOUT      25
+//#define I2S_BCLK      27
+//#define I2S_LRC       26
+#define I2S_DOUT      17
+#define I2S_BCLK      33
+#define I2S_LRC       18
 
 Audio audio;
+//Audio audio(true, I2S_DAC_CHANNEL_BOTH_EN);
 void setupPlayer() {
   audio.setPinout(I2S_BCLK, I2S_LRC, I2S_DOUT);
   audio.setVolume(1); // 0...21
 }
 
 void ttsThis(String iptText) {
-#ifdef CN
-  audio.connecttospeech( iptText.c_str(), "zh-CN");
-#else
-  audio.connecttospeech( iptText.c_str(), "en");
-#endif
+  audio.connecttospeech( iptText.c_str(), CN?"zh-CN":"en");
   while ( audio.isRunning()) {
     audio.loop();
 #ifdef LED
